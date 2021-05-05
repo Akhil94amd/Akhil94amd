@@ -1,0 +1,28 @@
+If dr.HasRows Then
+dr.Read()
+Label2.Text = dr.Item(“Question”)
+answerList.Items.Add(dr.Item(“Answer1”))
+answerList.Items.Add(dr.Item(“Answer2”))
+answerList.Items.Add(dr.Item(“Answer3”))
+answerList.Items.Add(dr.Item(“CorrectAnswer”))
+answerList = RandomizeListOrder(answerList)
+RadioButton1.Text = answerList(0)
+RadioButton2.Text = answerlist(1)
+RadioButton3.Text = answerList(2)
+RadioButton4.Text = answerlist(3)
+dr.Close()
+End If
+cn.Close()
+End Sub
+Private Sub mark()
+cn.ConnectionString = ConnectString
+cn.Open()
+cm.CommandText = “SELECT CorrectAnswer FROM Question”
+cm.Connection = cn
+dr = cm.ExecuteReader
+If dr.HasRows Then
+dr.Read()
+answer = dr.Item(“CorrectAnswer”)
+dr.Close()
+End If
+cn.Close()
